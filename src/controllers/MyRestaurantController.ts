@@ -21,7 +21,9 @@ const createMyRestaurant = async (req: Request, res: Response) => {
     const existingRestaurant = await Restaurant.findOne({ user: req.userId });
 
     if (existingRestaurant) {
-      return res.status(409).json({ message: "User restaurant already exists" });
+      return res
+      .status(409)
+      .json({ message: "User restaurant already exists" });
     }
 
     const imageUrl = await uploadImage(req.file as Express.Multer.File);
@@ -80,7 +82,7 @@ const uploadImage = async (file: Express.Multer.File): Promise<string> => {
     console.log("Error uploading image", error);
     throw new Error("Image upload failed");
   }
-};
+}; 
 
 export default {
   getMyRestaurant,
